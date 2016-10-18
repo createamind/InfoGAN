@@ -2,6 +2,7 @@ import numpy as np
 from tensorflow.examples.tutorials import mnist
 import os
 import numpy as np
+import scipy.io as sio  
 
 
 class Dataset(object):
@@ -85,3 +86,38 @@ class MnistDataset(object):
 
     def inverse_transform(self, data):
         return data
+
+
+class SVHNDataset(object):
+    def __init__(self, num_images_to_grab = None):
+        data_directory = "svhn/"
+        if not os.path.exists(data_directory):
+            os.makedirs(data_directory)
+
+        self.image_dim = 32*32*3
+        self.image_shape = (32,32,3)
+
+ 
+        mat=sio.loadmat(data_directory+'train_32x32.mat')  
+        print 'Loaded Matlab data.' 
+        data=mat['X']  
+        print data.shape
+        data = data.transpose(3,0,1,2)
+        print data.shape
+        self.train = Dataset(np.asarray(data))
+
+        #############
+        #label=mat['y']  
+        #for i in range(10):  
+        #    plt.subplot(2,5,i+1)  
+        #    plt.title(label[i][0])  
+        #    plt.imshow(data[...,i])  
+        #    plt.axis('off')  
+        #plt.show()  
+
+    def transform(self, data):
+        return data
+
+    def inverse_transform(self, data):
+        return data
+
