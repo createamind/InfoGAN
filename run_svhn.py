@@ -37,8 +37,8 @@ root_log_dir = "logs/svhn"
 root_checkpoint_dir = "ckt/svhn"
 batch_size = 128
 updates_per_epoch = 100    # How often to run the logging.
-checkpoint_snapshot_interval = 1000  # Save a snapshot of the model every __ updates.
-max_epoch = 50
+checkpoint_snapshot_interval = 10000  # Save a snapshot of the model every __ updates.
+max_epoch = 450
 
 
 # In[ ]:
