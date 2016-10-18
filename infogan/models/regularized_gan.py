@@ -27,7 +27,7 @@ class RegularizedGAN(object):
         self.reg_disc_latent_dist = Product([x for x in self.reg_latent_dist.dists if isinstance(x, (Categorical, Bernoulli))])
 
         image_size = image_shape[0]
-        if network_type == "mnist":
+        if network_type == "mnist" or network_type == "svhn":
             with tf.variable_scope("d_net"):
                 shared_template = \
                     (pt.template("input").
@@ -64,7 +64,7 @@ class RegularizedGAN(object):
                      custom_deconv2d([0] + list(image_shape), k_h=4, k_w=4).
                      flatten())
 
-        elif network_type == "celebA" or network_type == "svhn":
+        elif network_type == "celebA":
             with tf.variable_scope("d_net"):
                 shared_template = \
                     (pt.template("input").
