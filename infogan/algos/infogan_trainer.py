@@ -233,12 +233,15 @@ class InfoGANTrainer(object):
                 pbar.start()
 
                 all_log_vals = []
+                self.ganlp=3
                 for i in range(self.updates_per_epoch):
                     pbar.update(i)
                     x, _ = self.dataset.train.next_batch(self.batch_size)
                     feed_dict = {self.input_tensor: x}
                     log_vals = sess.run([self.discriminator_trainer] + log_vars, feed_dict)[1:]
-                    sess.run(self.generator_trainer, feed_dict)
+                    for j in range(self.ganlp):
+                        sess.run(self.generator_trainer, feed_dict)
+                        #print j
                     all_log_vals.append(log_vals)
                     counter += 1
 
