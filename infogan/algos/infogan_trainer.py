@@ -233,7 +233,8 @@ class InfoGANTrainer(object):
                 pbar.start()
 
                 all_log_vals = []
-                self.ganlp=3
+                self.ganlp=1
+                print "gan loop is " + str(self.ganlp)
                 for i in range(self.updates_per_epoch):
                     pbar.update(i)
                     x, _ = self.dataset.train.next_batch(self.batch_size)
